@@ -252,7 +252,9 @@ class Message(Value):
 		if not chunks:
 			raise DVRIPDecodeError('no data in DVRIP packet')
 		chunks[-1] = chunks[-1].rstrip(b'\x00\\')
-		return cls.json_to(load(_ChunkReader(chunks)))  # type: ignore # FIXME
+		data = load( _ChunkReader( chunks ) )
+		# print( dumps( data, indent = 4 ) )
+		return cls.json_to( data )  # type: ignore # FIXME
 
 	@classmethod
 	def frompackets(cls: Type[_M], packets: Iterable[Packet]) -> _M:

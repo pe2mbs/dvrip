@@ -35,25 +35,29 @@ _masktype = (_json_to_mask, _mask_for_json)
 
 
 class Host(Object):
-	_type:      fixedmember = fixedmember('DeviceType', 1)  # TODO
-	serial:    member[str] = member('SN')
-	mac:       member[str] = member('MAC')
-	router:    member[str] = member('GateWay', _iptype)
-	host:      member[str] = member('HostIP', _iptype)
-	mask:      member[int] = member('Submask', _masktype)  # FIXME
-	name:      member[str] = member('HostName')
-	tcpport:   member[int] = member('TCPPort')
-	udpport:   member[int] = member('UDPPort')
-	httpport:  member[int] = member('HttpPort')
-	httpsport: member[int] = member('SSLPort')
-	channels:  member[int] = member('ChannelNum')
-	_maxconn:   member[int] = member('TCPMaxConn')
-	_transport: fixedmember = fixedmember('MonMode', 'TCP')  # TODO
-	_maxbps:    member[int] = member('MaxBps')
-	_plan:      fixedmember = fixedmember('TransferPlan', 'AutoAdapt')  # TODO
-	_hs:        fixedmember = fixedmember('UseHSDownLoad', False)  # TODO
-	_state:     member[int] = member('NetConnectState')  # TODO
-	_others:    member[str] = member('OtherFunction')  # TODO
+	_type:      fixedmember 	= fixedmember('DeviceType', 305201157 )  # TODO
+	serial:    member[str] 		= member( 'SN' )
+	mac:       member[str] 		= member( 'MAC' )
+	router:    member[str] 		= member( 'GateWay', _iptype )
+	host:      member[str] 		= member( 'HostIP', _iptype )
+	mask:      member[int] 		= member( 'Submask', _masktype )  # FIXME
+	name:      member[str] 		= member( 'HostName' )
+	tcpport:   member[int] 		= member( 'TCPPort' )
+	udpport:   member[int] 		= member( 'UDPPort' )
+	httpport:  member[int] 		= member( 'HttpPort')
+	httpsport: member[int]		= member( 'SSLPort' )
+	channels:  member[int]		= member( 'ChannelNum' )
+	_maxconn:   member[int]		= member( 'TCPMaxConn')
+	_transport: fixedmember 	= fixedmember('MonMode', 'TCP' )  # TODO
+	_maxbps:    member[int]		= member( 'MaxBps')
+	_plan:      member[str]		= member( 'TransferPlan' )
+	_hs:        member[bool]	= member( 'UseHSDownLoad' )  # TODO
+	_state:     member[int]		= member( 'NetConnectState' )  # TODO
+	_others:    member[str]		= member( 'OtherFunction' )  # TODO
+	version:	member[str]		= member( 'Version' )
+	random_acc: member[ str ]	= member( 'RandomAcc' )
+	pid:		member[ str ]	= member( 'PID' )
+	build_data:	member[ str ]	= member( 'BuildDate' )
 
 class DiscoverReply(Object, Message):
 	type = 1531

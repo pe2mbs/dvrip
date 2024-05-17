@@ -2,8 +2,8 @@ from getopt import GetoptError, getopt
 from socket import gethostbyname
 from sys import stderr
 from typing import List, NoReturn
-from ..io import DVRIPClient
-from . import EX_USAGE, EX_NOHOST, guard, osexit, prog
+from dvrip.io import DVRIPClient
+from dvrip.cmd import EX_USAGE, EX_NOHOST, guard, osexit, prog
 
 
 def usage() -> NoReturn:
@@ -33,17 +33,15 @@ def run(args: List[str]) -> None:
 			except ValueError:
 				usage()
 
-	for result in DVRIPClient.discover(interface, timeout):
-		print('{} {} {} {}/{} via {} port {} channels {}'
-		      .format(result.serial, result.mac, result.name,
-		              result.host, result.mask, result.router,
-		              result.tcpport, result.channels))
+	for r in DVRIPClient.discover(interface, timeout):
+		print( f'Serial:   {r.serial}\nMAC:      {r.mac}\nName:     {r.name}\nHost:     {r.host}/{r.mask}\nVia:      {r.router}\nPort      {r.tcpport}\nChannels: {r.channels}' )
 
 
 def main() -> None:
 	from sys import argv
-	from . import host
+	from dvrip.cmd import host
 
 	if host() is not None:
 		usage()
+
 	guard(run, argv[1:])

@@ -249,7 +249,8 @@ class fixedmember(Member[object]):
 
 	def pop(self, pop: Callable[[str], object]) -> object:
 		if pop(self.key) != self.default:
-			raise DVRIPDecodeError('not the fixed value')
+			raise DVRIPDecodeError( f'not the fixed value: {self.key} - {self.name}, default: {self.default} | {self}' )
+
 		return self.default
 
 
