@@ -1,6 +1,7 @@
 try:
 	# For distributions
-	from ._version_lock import version  # type: ignore # pylint: disable=unused-import
+	from dvrip._version_lock import version  # type: ignore # pylint: disable=unused-import
+
 except ImportError:
 	# For development trees
 	from os import environ
@@ -8,6 +9,7 @@ except ImportError:
 
 	try:
 		from dulwich.porcelain import describe  # type: ignore
+
 	except ImportError:
 		from subprocess import SubprocessError, run
 		from warnings import warn
@@ -23,12 +25,12 @@ except ImportError:
 				             encoding='ascii')
 				            .stdout.rstrip('\n'))
 			except SubprocessError as e:  # pragma: no cover
-				warn("Could not determine dvrip version: {}"
-				     .format(e))
+				warn( f"Could not determine dvrip version: {e}" )
 				return '0.0.0-0-unknown'
 
 	if '_repo' not in globals():  # except for setup.py
 		_repo = join(dirname(dirname(__file__)), '.git')
+
 	_desc = describe(_repo).split('-', 3)
 	version = ('{0}.dev{1}+{2}'.format(*_desc)
 	           if len(_desc) == 3 else _desc[0])

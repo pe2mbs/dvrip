@@ -3,6 +3,10 @@ Changes
 
 Unreleased
 ----------
+0.1.0 (2024-05-17) by Marc Bertens-Nguyen under GPL2-only licence
+* ``dvr-discovery`` now supports newer versions of the DVR of Xiongmai.
+
+
 
 * The ``dvr`` tool can now invoke standalone scripts: ``dvr foo``
   searches for ``dvr-foo`` in the system PATH.
